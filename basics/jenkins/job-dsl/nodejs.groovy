@@ -49,7 +49,7 @@ pipelineJob('DSL-pipeline') {
         cpsScm {
             scm {
                 git {
-                    remote(url('git://github.com/poladinitz/docker-cicd.git'))
+                    remote{url('git://github.com/poladinitz/docker-cicd.git')}
                     branches('master', '**/feature*')
                     scriptPath('./basics/misc/Jenkinsfile')
                 }
