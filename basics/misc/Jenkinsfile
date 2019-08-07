@@ -22,7 +22,7 @@ node {
       docker run --rm -tid --name docker_test -p 3000 poladinitz/docker-cicd:latest
       PORT="$(docker ps|grep docker_test|sed 's/.*0.0.0.0://g'|sed 's/->.*//g')"
       curl -i localhost:$PORT
-      docker stop docker_test
+      docker kill docker_test
       '''
      }
    }
