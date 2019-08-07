@@ -43,3 +43,20 @@ job('NodeJS Docker example') {
         }
     }
 }
+
+pipelineJob('DSL-pipeline') {
+    definition {
+        cpsScm {
+            scm {
+                git {
+                    remote(url('git://github.com/poladinitz/docker-cicd.git'))
+                    branches('master', '**/feature*')
+                    scriptPath('./basics/misc/Jenkinsfile')
+                }
+            }
+        }
+    }
+    triggers {
+        scm('H/5 * * * *')
+    }
+}
