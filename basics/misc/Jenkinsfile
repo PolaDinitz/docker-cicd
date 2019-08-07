@@ -20,7 +20,7 @@ node {
    stage('docker run') {
      sh label: '', script: '''
       docker run --rm -tid --name docker_test -p 3000 poladinitz/docker-cicd:latest
-      PORT="$(docker ps|grep docker_test|sed 's/.*0.0.0.0://g'|sed 's/->.*//g')"
+      PORT=$(docker inspect CONTAINER_NAME | jq -r '.[].NetworkSettings.Ports."3000/tcp"[].HostPort')
       curl -i localhost:$PORT
       docker kill docker_test
       '''
